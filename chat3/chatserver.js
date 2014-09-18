@@ -1,5 +1,4 @@
 _ = require('underscore');
-var mysql = require('mysql');
 
 var Server = function (options) {
     var self = this;

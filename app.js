@@ -5,6 +5,7 @@ var path = require('path');
 var morgan = require('morgan');
 
 var app = express();
+process.title = "multichat";
 app.set('views', path.join(__dirname, '/'));
 app.use(express.static(path.join(__dirname, '/')));
 app.use(morgan('dev'));

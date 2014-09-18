@@ -5,3 +5,4 @@ echo "Starting all chat servers"
 ./node_modules/forever/bin/forever start chat2/app.js
 ./node_modules/forever/bin/forever start chat3/app.js
 ./node_modules/forever/bin/forever start chat4/app.js
+npm start
