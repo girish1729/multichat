@@ -1,0 +1,9 @@
+#!/bin/sh
+
+for dir in chat*
+do
+	cd $dir
+	npm install
+	cd ..
+done
+npm install

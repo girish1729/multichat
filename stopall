@@ -1,0 +1,7 @@
+#!/bin/sh
+
+echo "Stopping all chat servers"
+./node_modules/forever/bin/forever stop chat1/app.js
+./node_modules/forever/bin/forever stop chat2/app.js
+./node_modules/forever/bin/forever stop chat3/app.js
+./node_modules/forever/bin/forever stop chat4/app.js

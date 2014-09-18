@@ -1,0 +1,15 @@
+{
+  "name": "MultiChat",
+  "version": "1.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "express": "*",
+    "jade": "*",
+    "socket.io": "*",
+    "underscore": "*",
+    "backbone": "*"
+  }
+}

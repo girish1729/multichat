@@ -1,0 +1,25 @@
+# Multichat using socket.io
+
+Multiple chatrooms using iframe and socket.io using bootstrap styling
+
+## Instructions
+
+If you would like to download the code and try it for yourself:
+
+1. Clone the repo: `git clone https://github.com/girish1729/oauthsample`
+2. Install packages: `npm install`
+3. Change out auth credentials in auth.js
+4. Launch: `npm start`
+5. Visit in your browser at: `http://localhost:8011`
+
+## Dscription
+
+Multichat builds on top of the socket.io based chatroom software
+available on the web. This is just to demonstrate how easy it is to
+build multiple  chatrooms using iframe, forever and node.js.
+
+
+
+## Contact
+
+You are free to mail me at girish@gayatri-hitech.com for any questions.
