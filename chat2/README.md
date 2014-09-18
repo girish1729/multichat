@@ -6,11 +6,10 @@ Multiple chatrooms using iframe and socket.io using bootstrap styling
 
 If you would like to download the code and try it for yourself:
 
-1. Clone the repo: `git clone https://github.com/girish1729/oauthsample`
+1. Clone the repo: `git clone https://github.com/girish1729/multichat`
 2. Install packages: `npm install`
-3. Change out auth credentials in auth.js
-4. Launch: `npm start`
-5. Visit in your browser at: `http://localhost:8011`
+3. Launch: `npm start`
+4. Visit in your browser at: `http://localhost:8022`
 
 ## Dscription
 
