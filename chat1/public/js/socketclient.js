@@ -14,6 +14,11 @@ var ChatClient = function(options) {
     self.chat = function(chat) {
 	self.socket.emit("chat", chat);
     }
+    self.kickuser = function(name) {
+	self.socket.emit("kickuser", name);
+    }
+
+
 
     self.setResponseListeners = function(socket) {
         socket.on('welcome', function(data) {

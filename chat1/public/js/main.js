@@ -37,6 +37,11 @@ var MainController = function () {
         self.chatClient.chat(chat);
     });
 
+    self.viewEventBus.on("kickuser", function (name) {
+        self.chatClient.kickuser(name);
+    });
+
+
     self.appEventBus.on("loginDone", function () {
         self.homeModel = new HomeModel();
         self.homeView = new HomeView({
@@ -91,6 +96,7 @@ var MainController = function () {
     self.appEventBus.on("userLeft", function (data) {
 	arr = data.split(',');
         self.kickModel.removeUser(arr[0]);
+	console.log("I am leaving " + arr[0]);
 
         self.homeModel.addChat({
             sender: "",
@@ -103,6 +109,7 @@ var MainController = function () {
     self.appEventBus.on("userKicked", function (data) {
 	arr = data.split(',');
         self.kickModel.removeUser(arr[0]);
+	console.log("I am kicking user" + arr[0]);
 
         self.homeModel.addChat({
             sender: "",

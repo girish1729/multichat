@@ -112,7 +112,7 @@ var HomeView = Backbone.View.extend({
 var KickView = Backbone.View.extend({
     template: _.template($("#kick-template").html()),
     events: {
-	'mousedown #kickButton': 'mouseInputPressed'
+	'mousedown #kickButton': 'kickUser'
     },
 
     initialize: function(options) {
@@ -136,14 +136,22 @@ var KickView = Backbone.View.extend({
 	}, this);
     },
     renderUser: function(model) {
-	var template = _.template("<a class='list-group-item'><%= name %></a>");
+	var template = _.template("<a class='list-group-item'>" +
+	 "<%= name %> &nbsp;&nbsp;<input type='checkbox' value=<%= name %> /></a>");
 	this.$('#userList').append(template(model.toJSON()));
 	this.$('#userCount').html(this.model.get("onlineUsers").length);
 	this.$('.nano').nanoScroller();
     },
     // events
-    kickUser: function(evt) {
-	    self.vent.trigger("userKicked", data);
+    kickUser: function(evt, model) {
+		kicku = [];
+		this.$(':checkbox:checked').each(function() {
+			kicku.push($(this).val());
+		});
+		for(var i = 0; i < kicku.length; i++) {
+			this.vent.trigger("kickuser", kicku[i]);
+		}
+		
 	    return false;
     }
 });

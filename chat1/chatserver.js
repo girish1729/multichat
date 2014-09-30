@@ -64,12 +64,7 @@ var Server = function (options) {
                 self.io.sockets.emit("userJoined", sendstr);
             }
         });
-        socket.on('kickuser', function (username) {
-            self.users.splice(self.users.indexOf(username), 1);
-		 //self.users.socket.id.disconnect();
-            self.io.sockets.emit("userKicked", username);
-        });
-    }
+            }
 
     self.setResponseListeners = function (user) {
         user.socket.on('disconnect', function () {
@@ -85,8 +80,16 @@ var Server = function (options) {
                 return item.user;
             });
             user.socket.emit("onlineUsers", users);
-	    console.log("I am getting onlineUsers " + users);
         });
+
+	user.socket.on('kickuser', function (username) {
+            self.users.splice(self.users.indexOf(username), 1);
+		var avatar = lookupavatar(username);
+		sendstr = username + "," + 
+			 avatar.avatar + "," +  avatar.color;
+            self.io.sockets.emit("userKicked", sendstr);
+        });
+
 
         user.socket.on("chat", function (chat) {
             if (chat) {
