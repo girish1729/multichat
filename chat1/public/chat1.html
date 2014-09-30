@@ -2,8 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Multichat room #1</title>
+  <title>Multichat room #2</title>
   <link href="/css/bootstrap.css" rel="stylesheet">
+  <link href="/bower_components/ladda/dist/ladda-themeless.min.css" rel="stylesheet">
   <link href="/css/nanoscroller.css" rel="stylesheet">
   <link href="/css/main.css" rel="stylesheet">
 </head>
@@ -13,70 +14,85 @@
 
   <script type='text/template' id="login-template">
           <div class="row">
-            <div class="col-md-2 col-xs-8 col-md-offset-1 text-center">
+            <div class="col-md-4  col-md-offset-1 text-center">
               <div class="well">
 		<div class="form-group
 			    <% if (error)  {%>
 			    has-error
 			    <% } %>
 			    ">
-		  <label> Multichat room #1</label>
+		  <label> Multichat room 2</label>
 		  <input type="text" class="form-control" id="nameText"
 placeholder="Login">
 
 		  <label class="control-label"> <%= error %> </label>
 
 		  <br>
-		  <a id="nameBtn" type="button" class="btn btn-primary badge btn-xs ladda-button" data-size="l" data-style="zoom-out"><span class="ladda-label">Join</span></a>
+		  <a id="nameBtn" type="button" class="btn btn-primary badge btn-xs ladda-button" data-size="l" data-style="zoom-out"><span
+class="ladda-label">Join</span></a>
 		</div>
               </div>
             </div>
 	  </div>
   </script>
 
+
   <script type='text/template' id="home-template">
     <div class="row">
 
-      <div class="col-md-8 ">
+      <div class="col-md-5 ">
 	<div class="panel panel-default">
-	  <div class="panel-heading"> Lobby 1 </div>
+	  <div class="panel-heading"> Lobby 2</div>
 
 	  <div class="panel-body">
-	    <div class="nano">
+
+	     <div class="nano">
 	      <div class="content">
 		<div class="list-group" id="chatList"></div>
 	      </div>
-	   </div>
+	     </div>
+
 	    <form>
 	      <input class="form-control" type="text" id="chatInput"></input>
+	      <input class="rightside" type="button" value="Chat" id="chatButton"></input>
 	    </form>
-	  </div>
 
+	  </div>
 	</div>
       </div>
+    </div>
+
+  </script>
+
+  <script type='text/template' id="kick-template">
+    <div class="row">
 
       <div class="col-md-4 ">
 	<div class="panel panel-default">
 
-
 	  <div class="panel-heading">
-	    <h3 class="panel-title">Users Online <span class="badge pull-right" id="userCount"></span></h3>
+	    <h3 class="panel-title">Users Online 
+		<span class="badge pull-right" id="userCount"></span>
+	    </h3>
 	  </div>
 
 	  <div class="panel-body">
-
 	    <div class="nano">
 	      <div class="content">
 		<div class="list-group" id="userList"></div>
+	      <input class="rightside" type="button" value="Kick user"
+id="kickButton"></input>
 	      </div>
 	    </div>
-
 	  </div>
-
 	</div>
       </div>
+
     </div>
+
   </script>
+
+
 
   <script src="/socket.io/socket.io.js"></script>
   <script src="/bower_components/jquery/jquery.min.js"></script>
@@ -93,4 +109,3 @@ placeholder="Login">
   <script src="/js/main.js"></script>
   
 </body>
-</html>

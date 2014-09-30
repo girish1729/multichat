@@ -40,3 +40,27 @@ var LoginModel = Backbone.Model.extend({
 	error: ""
     }
 });
+
+var KickModel = Backbone.Model.extend({
+    defaults: {
+	onlineUsers: new UserCollection()
+    },
+    addUser: function(username) {
+	this.get('onlineUsers').add(new UserModel({ name: username }));
+    },
+    removeUser: function(username) {
+	var onlineUsers = this.get('onlineUsers');
+        var u = onlineUsers.find(function(item) { return item.get('name') == username });
+        if (u) {
+            onlineUsers.remove(u);
+        }
+    } 
+});
+
+var adminLoginModel = Backbone.Model.extend({
+    defaults: {
+	error: ""
+    }
+});
+
+

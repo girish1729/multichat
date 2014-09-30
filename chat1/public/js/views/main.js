@@ -13,8 +13,7 @@ var ContainerView = Backbone.View.extend({
 var LoginView = Backbone.View.extend({
     template: _.template($('#login-template').html()),
     events: {
-        'click #nameBtn': 'onLogin',
-        'click #adminNameBtn': 'onAdminLogin'
+        'click #nameBtn': 'onLogin'
     },
 
     initialize: function(options) {
@@ -39,41 +38,11 @@ var LoginView = Backbone.View.extend({
     }
 });
 
-/*
-var AdminView = Backbone.View.extend({
-    template: _.template($('#admin-login-template').html()),
-
-    events: {
-        'click #adminNameBtn': 'onAdminLogin'
-    },
-
-    initialize: function(options) {
-	this.vent = options.vent;
-
-	this.listenTo(this.model, "change:error", this.render, this);
-    },
-
-    render: function() {
-        this.$el.html(this.template(this.model.toJSON()));
-
-	if (!this.l) {
-	    this.l = Ladda.create(this.$("#adminNameBtn").get(0));
-	} else {
-	    this.l.stop();
-	}
-        return this;
-    },
-    onAdminLogin: function() {
-	this.l.start();
-	this.vent.trigger("adminlogin", this.$('#passText').val());
-    }
-});
-*/
-
 var HomeView = Backbone.View.extend({
     template: _.template($("#home-template").html()),
     events: {
-	'keypress #chatInput': 'chatInputPressed'
+	'keypress #chatInput': 'chatInputPressed',
+	'mousedown #chatButton': 'mouseInputPressed'
     },
 
     initialize: function(options) {
@@ -130,5 +99,52 @@ var HomeView = Backbone.View.extend({
 	    this.$('#chatInput').val('');
 	    return false;
 	}
+    },
+     mouseInputPressed: function(evt) {
+	    this.vent.trigger("chat", this.$('#chatInput').val());
+	    this.$('#chatInput').val('');
+	    return false;
+    }
+
+});
+
+
+var KickView = Backbone.View.extend({
+    template: _.template($("#kick-template").html()),
+    events: {
+	'mousedown #kickButton': 'mouseInputPressed'
+    },
+
+    initialize: function(options) {
+	this.vent = options.vent;
+	var onlineUsers = this.model.get('onlineUsers');
+
+	this.listenTo(onlineUsers, "add", this.renderUser, this);
+	this.listenTo(onlineUsers, "remove", this.renderUsers, this);
+	this.listenTo(onlineUsers, "reset", this.renderUsers, this);
+    },
+    render: function() {
+	var onlineUsers = this.model.get("onlineUsers");
+	this.$el.html(this.template());
+	this.renderUsers();
+	return this;
+    },
+    renderUsers: function() {
+	this.$('#userList').empty();
+	this.model.get("onlineUsers").each(function (user) {
+	    this.renderUser(user);
+	}, this);
+    },
+    renderUser: function(model) {
+	var template = _.template("<a class='list-group-item'><%= name %></a>");
+	this.$('#userList').append(template(model.toJSON()));
+	this.$('#userCount').html(this.model.get("onlineUsers").length);
+	this.$('.nano').nanoScroller();
+    },
+    // events
+    kickUser: function(evt) {
+	    self.vent.trigger("userKicked", data);
+	    return false;
     }
 });
+
