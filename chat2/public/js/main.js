@@ -14,16 +14,14 @@ var MainController = function () {
         });
         self.chatClient.connect();
         self.loginModel = new LoginModel();
+        self.kickModel = new KickModel();
+        self.homeModel = new HomeModel();
 
         self.containerModel = new ContainerModel({
             viewState: new LoginView({
                 vent: self.viewEventBus,
                 model: self.loginModel
-            })/*,
-            viewState: new AdminView({
-                vent: self.viewEventBus,
-                model: self.loginModel
-            })*/
+            })
         });
         self.containerView = new ContainerView({
             model: self.containerModel
@@ -48,13 +46,13 @@ var MainController = function () {
         self.containerModel.set("viewState", self.homeView);
     });
 
-    self.appEventBus.on("adminLoginDone", function () {
-        self.homeModel = new HomeModel();
-        self.homeView = new HomeView({
+    self.appEventBus.on("adminloginDone", function () {
+        self.kickModel = new KickModel();
+	 self.kickView = new KickView({
             vent: self.viewEventBus,
-            model: self.homeModel
+            model: self.kickModel
         });
-        self.containerModel.set("viewState", self.adminView);
+        self.containerModel.set("viewState", self.kickView);
     });
 
     self.appEventBus.on("loginNameBad", function (name) {
@@ -65,9 +63,9 @@ var MainController = function () {
         self.loginModel.set("error", "Name already exists");
     });
 
+    
     self.appEventBus.on("usersInfo", function (data) {
-        var onlineUsers = self.homeModel.get("onlineUsers");
-
+        var onlineUsers = self.kickModel.get("onlineUsers");
         var users = _.map(data, function (item) {
             return new UserModel({
                 name: item
@@ -76,22 +74,43 @@ var MainController = function () {
         onlineUsers.reset(users);
     });
 
-    self.appEventBus.on("userJoined", function (username) {
-        self.homeModel.addUser(username);
+
+    self.appEventBus.on("userJoined", function (data) {
+	arr = data.split(',');
+        self.kickModel.addUser(arr[0]);
         self.homeModel.addChat({
             sender: "",
-            message: "<span class='statuson'>" + username + " joined room.</span>"
+            avatar: arr[1],
+            color: arr[2],
+            message: "<span class='statuson'>" + arr[0]
+		+ " joined room.</span>"
         });
     });
 
-    self.appEventBus.on("userLeft", function (username) {
-        self.homeModel.removeUser(username);
+    self.appEventBus.on("userLeft", function (data) {
+	arr = data.split(',');
+        self.kickModel.removeUser(arr[0]);
 
         self.homeModel.addChat({
             sender: "",
+            avatar: arr[1],
+            color: arr[2],
             message: "<span class='statusoff'>" + username + " left room.</span>"
         });
     });
+
+    self.appEventBus.on("userKicked", function (data) {
+	arr = data.split(',');
+        self.kickModel.removeUser(arr[0]);
+
+        self.homeModel.addChat({
+            sender: "",
+            avatar: arr[1],
+            color: arr[2],
+            message: "<span class='statusoff'>" + username + " kicked out.</span>"
+        });
+    });
+
 
     self.appEventBus.on("chatReceived", function (chat) {
         self.homeModel.addChat(chat);

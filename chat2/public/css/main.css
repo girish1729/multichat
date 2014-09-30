@@ -1,10 +1,13 @@
 body {
-	top: 10%;
 	margin-top: 10%;
 }
 
+.avatar {
+	width: 30px;
+	height: 30px;
+}
 .container {
-    width: 100%;
+	width: 100%;
 }
 
 .nano {  
@@ -80,4 +83,28 @@ body {
 	height: 500px;
 	margin-left: 20px;
 	margin-right: 20px;
+}
+
+.blue {
+	color: blue;
+}
+
+.green {
+	color: green;
+}
+.red {
+	color: red;
+}
+.orange {
+	color: orange;
+}
+.black {
+	color: black;
+}
+.yellow {
+	color: yellow;
+}
+
+.admin {
+	color: #1222d7;
 }

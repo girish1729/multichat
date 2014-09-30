@@ -3,15 +3,63 @@
 <head>
   <meta charset="utf-8">
   <title>Multichat List of rooms</title>
+<style>
+.chatframe {
+	float: left;
+	width: 470px;
+	height: 700px;
+	margin: 10px;
+	border: 2px solid grey;
+}
+iframe {
+	width: 470px;
+	height: 660px;
+}
+.chaticon {
+	float: right;
+}
+</style>
 </head>
 <body>
-	<iframe frameborder="0" scrolling="no" width="500" height="700"
-	id='topleft' src="http://mail.smuuth.gayatri-hitech.com:8011"></iframe>
-	<iframe frameborder="0" scrolling="no" width="500" height="700"
-	id='topright' src="http://mail.smuuth.gayatri-hitech.com:8022"></iframe>
-	<iframe frameborder="0" scrolling="no" width="500" height="700"
-	id='botleft' src="http://mail.smuuth.gayatri-hitech.com:8033"></iframe>
-	<iframe frameborder="0" scrolling="no" width="500" height="700"
-	id='botright' src="http://mail.smuuth.gayatri-hitech.com:8044"></iframe>
+	<div class="chatframe">
+	<iframe frameborder="0" scrolling="no" 
+	id='topleft' src="http://localhost:8022"></iframe>
+		<p>
+		<a id="first" href="http://localhost:8022" target="_blank">
+		<img class="chaticon"  title="Pop out" width=20px height=20px src="images/chaticon.jpg" type="button"> </img>
+		</a>
+		</p>
+	</div>
+
+	<div class="chatframe">
+	<iframe frameborder="0" scrolling="no"
+	id='topright' src="http://localhost:8022"></iframe>
+		<p>
+		<a id="second" href="http://localhost:8022" target="_blank">
+		<img class="chaticon" title="Pop out" width=20px height=20px src="images/chaticon.jpg" type="button"> </img>
+		</a>
+		</p>
+	</div>
+
+	<div class="chatframe">
+	<iframe frameborder="0" scrolling="no"
+	id='botleft' src="http://localhost:8033"></iframe>
+		<p>
+		<a id="third" href="http://localhost:8033" target="_blank">
+		<img class="chaticon" title="Pop out" width=20px height=20px src="images/chaticon.jpg" type="button"> </img>
+		</a>
+		</p>
+	</div>
+
+	<div class="chatframe">
+	<iframe frameborder="0" scrolling="no" 
+	id='botright' src="http://localhost:8044"></iframe>
+		<p>
+		<a id="fourth" href="http://localhost:8044" target="_blank">
+		<img class="chaticon" width=20px title="Pop out" height=20px src="images/chaticon.jpg" type="button"> </img>
+		</a>
+		</p>
+	</div>
+
 </body>
 </html>

@@ -13,15 +13,18 @@ var ChatClient = function(options) {
     }
     self.chat = function(chat) {
 	self.socket.emit("chat", chat);
-	    //socket.emit("kickuser" , 'hardy');
     }
 
     self.setResponseListeners = function(socket) {
         socket.on('welcome', function(data) {
-	    // Get list of online users
-	    socket.emit("onlineUsers");
             self.vent.trigger("loginDone", data);
         });
+	 socket.on('adminlogin', function(data) {
+	    // Get list of online users
+	    socket.emit("onlineUsers");
+            self.vent.trigger("adminloginDone", data);
+        });
+
 	socket.on('loginNameExists', function(data) {
 	    self.vent.trigger("loginNameExists", data);
 	});
@@ -29,7 +32,6 @@ var ChatClient = function(options) {
 	    self.vent.trigger("loginNameBad", data);
 	});
 	socket.on('onlineUsers', function(data) {
-	    console.log(data);
 	    self.vent.trigger("usersInfo", data);
 	});
 	socket.on('userJoined', function(data) {
@@ -45,27 +47,4 @@ var ChatClient = function(options) {
 	    self.vent.trigger("userKicked", data);
 	});
     }
-	/*
-    self.hostname = 'http://' + window.location.host + "/admin";
-
-    self.connect = function() {
-        self.socket = io.connect(self.hostname);
-
-        self.setAdminResponseListeners(self.socket);
-    }
-
-    self.setAdminResponseListeners = function(socket) {
-	socket.on('welcomeadmin', function(data) {
-	    // request server info
-	    socket.emit("onlineUsers");
-	    
-            self.vent.trigger("adminLoginDone", data);
-        });
-
-
-	socket.on('userKicked', function(data) {
-	    self.vent.trigger("userKicked", data);
-	});
-   }
-	*/
 }

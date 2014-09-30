@@ -1,5 +1,22 @@
 _ = require('underscore');
 
+avatartbl = {
+	'foo': { 'role' : 'user', 'avatar' : 'woman', 'color' : 'red'},
+	'bar' : {'role' : 'user', 'avatar' : 'user54', 'color' : 'orange'},
+	'bhavna' : {'role' : 'user', 'avatar' : 'teenage', 'color' : 'green'},
+	'smile' : {'role' : 'user' , 'avatar' : 'smiling43', 'color' : 'black'},
+	'boss' : {'role' : 'admin', 'avatar' : 'admin', 'color' : 'admin'},
+};
+
+
+function lookupavatar(user) {
+        if(avatartbl[user] === undefined) {
+                return {'avatar' : 'default', 'color' : 'blue'};
+        } else {
+                return avatartbl[user];
+        }
+}
+
 var Server = function (options) {
     var self = this;
     self.io = options.io;
@@ -26,15 +43,20 @@ var Server = function (options) {
             } else {
                 var newUser = new User({
                     user: username,
-                    socket: socket,
-                    id: socket.id
+	            socket: socket
                 });
+		var avatar = lookupavatar(username);
 
                 self.users.push(newUser);
                 self.setResponseListeners(newUser);
 
                 socket.emit("welcome");
-                self.io.sockets.emit("userJoined", newUser.user);
+		console.log(newUser.socket.id);
+		console.log(avatar.avatar);
+		console.log(avatar.color);
+		sendstr = newUser.user + "," + 
+			 avatar.avatar + "," +  avatar.color;
+                self.io.sockets.emit("userJoined", sendstr);
             }
         });
         socket.on('kickuser', function (username) {
@@ -47,7 +69,10 @@ var Server = function (options) {
     self.setResponseListeners = function (user) {
         user.socket.on('disconnect', function () {
             self.users.splice(self.users.indexOf(user), 1);
-            self.io.sockets.emit("userLeft", user.user);
+		var avatar = lookupavatar(user);
+		sendstr = user + "," + 
+			 avatar.avatar + "," +  avatar.color;
+            self.io.sockets.emit("userLeft", sendstr);
         });
 
         user.socket.on("onlineUsers", function () {
@@ -61,51 +86,13 @@ var Server = function (options) {
             if (chat) {
                 self.io.sockets.emit("chat", {
                     sender: user.user,
+                    avatar: lookupavatar(user.user).avatar,
+                    color: lookupavatar(user.user).color,
                     message: ': ' + chat
                 });
             }
         });
    }
-
-	/*
-    self.io
-        .of('/admin')
-        .on('connection', function (socket) {
-            self.handleAdminConnection(socket);
-        });
-
-    self.handleAdminConnection = function (socket) {
-        var newUser = new User({
-            user: 'admin',
-            socket: socket
-        });
-
-        self.users.push(newUser);
-
-        self.setAdminResponseListeners(newUser);
-    }
-
-
-    self.setAdminResponseListeners = function (user) {
-        user.socket.on('adminkick', function () {
-            self.users.splice(self.users.indexOf(user), 1);
-            self.io.sockets.emit("userKicked", user.user);
-        });
-
-
-        user.socket.on("onlineUsers", function () {
-
-            var users = _.map(self.users, function (item) {
-                return item.user;
-            });
-
-            user.socket.emit("onlineUsers", users);
-        });
-
-
-    }
-	*/
-
 }
 
 // User Model
