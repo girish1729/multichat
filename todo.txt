@@ -2,14 +2,14 @@
 - popout possibility			done
 - minimal graphism 			done
 	(white, transparent and #E44C41 for send button)     
-- different color for diffrent users    done                                 
-- specific color + icon for admin of this chat done
 
 - kick timer (1, 2, 3, 5, 10, 15, 20, 30, 60 min - 
      2, 3, 4, 5 hours - 1, 2, 3, 5, 7 days)      
 
 - if logged (= access to chat with: username/avatar) done                   
 
+- different color for diffrent users                                    
+- specific color + icon for admin of this chat                          
 
 - resticted chat to already logged-in users                             
 
@@ -17,8 +17,4 @@
 - Specific user got admin rights on their chat as 
 + ban (permanent - admin can unban)                                     
 
-- multiple chatrooms implemented to scale to 1000s
 
-- zebra pattern for chat
-
-- ability to edit room name

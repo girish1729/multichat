@@ -1,0 +1,115 @@
+body {
+	margin-top: 10%;
+}
+
+.avatar {
+	width: 30px;
+	height: 30px;
+}
+.container {
+	width: 100%;
+}
+
+.nano {  
+	width: auto; 
+	height: 500px; 
+}
+
+.nano .content{ 
+	padding: 0px; 
+}
+
+.nano .pane { 
+	background: red;
+}
+
+.nano .slider { 
+	background: grey; 
+}
+
+.text-info {
+  	color: #e44c41;
+	font-weight: bold;
+}
+
+.msgbox {
+  	color: grey;
+}
+
+.statuson {
+  	color: #cccf00;
+}
+.statusoff {
+  	color: black;
+}
+
+/* Iframes */
+
+#topleft {
+	top: 0%;
+	margin-top: 0%;
+	width: 500px;
+	height: 500px;
+	float: left;
+	margin-left: 20px;
+	margin-right: 20px;
+}
+
+#topright {
+	top: 0%;
+	margin-top: 0%;
+	width: 500px;
+	height: 500px;
+	float: right;
+	margin-left: 20px;
+	margin-right: 20px;
+}
+
+#botleft {
+	top: 40%;
+	margin-top: 40%;
+	width: 500px;
+	height: 500px;
+	float: left;
+	margin-left: 20px;
+	margin-right: 20px;
+}
+
+#botright {
+	top: 40%;
+	margin-top: 40%;
+	float: right;
+	width: 500px;
+	height: 500px;
+	margin-left: 20px;
+	margin-right: 20px;
+}
+
+.blue {
+	color: blue;
+}
+
+.green {
+	color: green;
+}
+.red {
+	color: red;
+}
+.orange {
+	color: orange;
+}
+.black {
+	color: black;
+}
+.yellow {
+	color: yellow;
+}
+
+.admin {
+	color: #1222d7;
+}
+
+.rightside {
+	background: #e7e7e7;
+	float: right;
+}
